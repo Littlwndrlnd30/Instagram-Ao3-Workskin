@@ -1,0 +1,894 @@
+/*This is just an ugly solution to force a dark background (you can remove this if you alraedy use a dark backgroun/ non-white background)*/
+
+#workskin .background {
+  background: #484848;
+  padding: 20px 2px;
+}
+
+#workskin .text {
+  color: white;
+  padding-bottom: 20px;
+}
+/* This contains the logical elements to open/close the differents pages */
+
+/*
+
+
+    To open/ close any page you have to click the summary so how this is implemented is that each element inside of the summary is used as 
+    close or open button.
+        The ig-header is the open button for the profile
+        The .ig-profile-topbar is the close button for the profile 
+            both are inside the summary of inner (details) and thus could both open and close but are only shown in one state 
+        The ig-profile-header is the open button of the story
+        The .ig-story-close is the close button for the story 
+            both are inside the summary of inner2 and thus could both open and close but they are only shown in one state
+
+
+  This is the structure of any changabele element:
+    <summary>
+      interactive element
+      <details> 
+        replacment Content 
+      <details>
+    </summary>
+    original content 
+
+    so normaly you would see:
+        ->Summary a
+        original content
+
+    but when open you see: 
+      -> summary b
+        details/replacment 
+
+*/
+/*hides the summary of the outer element*/
+#workskin .outer > summary {
+  display: none;
+}
+
+#workskin summary {
+  cursor: pointer;
+  padding-left: 0px;
+  background: #222;
+  color: #fff;
+  border-radius: 6px;
+  list-style: none;
+  margin-top: -10px;
+}
+
+#workskin .original {
+  position: static;
+}
+/*this is essential so that only one element is shown */
+#workskin .replacement {
+  padding: 0px;
+  margin-top: -20px;
+}
+/*in the normal state replacment is hidden*/
+#workskin .inner .replacement {
+  display: none;
+}
+/*when clicked the replacment is displayed*/
+#workskin .inner[open] .replacement {
+  display: block;
+  position: relative;
+}
+/*when clicked original (and any elements on the smae level) get hidden*/
+#workskin .inner[open] ~ .original {
+  display: none;
+}
+/*header is hidden when the profile is opened*/
+#workskin .inner[open] .ig_header {
+  display: none;
+}
+/*topbar (close button for the profile) is hidden when the post is open*/
+#workskin .ig-profile-topbar {
+  display: none;
+}
+/*topbar is displayed when the profile is open*/
+#workskin .inner[open] .ig-profile-topbar {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 15px 16px;
+  border-bottom: 1px solid #efefef;
+  background: white;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 5; /*can not be hidden when the story is open so it needs to be hidden behind the story*/
+  border-radius: 18px;
+}
+
+/*this is a repeat of the above def. for the story logic to work*/
+#workskin .originalstory,
+#workskin .replacementstory {
+  padding: 0px;
+  margin-top: -20px;
+}
+
+#workskin .inner2 .replacementstory {
+  display: none;
+}
+
+#workskin .inner2[open] .replacementstory {
+  display: block;
+}
+
+#workskin .inner2[open] ~ .originalstory {
+  display: none;
+}
+
+#workskin .inner2[open] .ig-profile-header {
+  display: none;
+}
+
+/*close button for the story with hidden/displayed logic*/
+#workskin .ig-story-close {
+  display: none;
+}
+
+#workskin .inner2[open] .ig-story-close {
+  display: inline-block;
+  position: absolute;
+  right: 20px;
+  top: 5px;
+  z-index: 10;
+  color: white;
+  cursor: pointer;
+}
+
+
+/*this defines how summary inside inner and inner2 look (maybe cleaner if .inner summary: catch both as inner2 is inside inner)*/
+#workskin .inner > summary {
+  list-style: none;
+  cursor: pointer;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 8px 10px;
+  background: none;
+  border-radius: 0;
+}
+
+#workskin .inner2 > summary {
+  list-style: none;
+  cursor: default;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 8px 10px;
+  background: none;
+  border-radius: 0;
+}
+
+/*hides the triangle that details usually has for both inner and inner2*/
+#workskin .inner > summary::-webkit-details-marker {
+  display: none;
+}
+ /*makes the elements look clickable*/
+#workskin .inner > summary:hover .ig_username {
+  opacity: 0.5;
+}
+
+#workskin .inner2 > summary:hover .ig-profile-avatar {
+  opacity: 0.8;
+}
+
+
+
+/*TODO: try make non interactive version for visual*/
+
+
+/*This is now just styling to make all of the elements look like instagram*/
+
+/*First this is all formating for the initial post layout*/
+#workskin .outer .container {
+  position: relative;
+  background: white;
+  padding: 0px;
+  border-radius: 18px;
+  max-width: 325px;
+}
+#workskin .outer {
+  background: white;
+  padding-bottom: 0px;
+  border-radius: 18px;
+  max-width: 325px;
+}
+
+#workskin .ig_avatar {
+  cursor: default;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  padding: 4px;
+  background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
+}
+
+#workskin .ig_avatar img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  border: 2px solid white;
+}
+
+#workskin .ig_header {
+  margin: 0;
+  display: flex;
+  width: 100%;
+  padding-left: 10px;
+  align-items: center;
+  margin-top: 10px;
+}
+
+#workskin .ig_user {
+  min-width: 0;
+  margin: 0;
+  vertical-align: middle;
+  padding-left: 10px;
+  line-height: 1.4;
+  flex: 1;
+}
+
+#workskin .ig_username {
+  padding-top: 0px;
+  color: #000000;
+  font-weight: bold;
+  font-size: 14px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin: 0;
+  padding: 0;
+}
+
+#workskin .ig_location {
+  margin: 0;
+  padding: 0;
+  color: #888;
+  font-size: 12px;
+}
+
+#workskin .ig_img {
+  position: relative;
+  cursor: grab;
+  margin-top: -15px;
+  max-height: 375px;
+  overflow-y: scroll;   /*right now it is the y direction maybe I wanna change that*/
+  scrollbar-width: none;
+}
+
+#workskin .ig_img img {
+  width: 100%;
+  display: inline-block;
+  padding: 0;
+}
+/*hides scrollbar inside scrollable element */
+#workskin .ig_img::-webkit-scrollbar {
+  display: none;
+}
+
+/*visual aid to make it obvious that the element is scrollable */
+#workskin .ig_img::after {
+  content: "››";
+  position: absolute;
+  font-size: 30px;
+  color: white;
+  transform: rotate(90deg);
+  right: 50%;
+  top: 90%;
+}
+
+#workskin .ig-action-row {
+  width: 100%;
+  overflow: hidden;
+  padding: 6px 10px;
+}
+
+#workskin .ig-actions {
+  float: left;
+}
+/*for the like/comment/share numbers*/
+#workskin .ig-action-text {
+  text-align: left;
+  color: black;
+  font-size: 14px;
+  margin-left: -2px;
+}
+
+#workskin .ig-bookmark {
+  float: right;
+  padding-right: 20px;
+}
+
+/*all icons(like/comment share) that are not the bookmark*/
+#workskin .ig-icon {
+  display: inline-block;
+  padding-left: 5px;
+  width: 22px;
+  height: 22px;
+  margin-right: 10px;
+  vertical-align: middle;
+}
+/*for the text "liked by xyz and others"*/
+#workskin .ig-likes {
+  color: #484848;
+  font-size: 13px;
+  margin-top: -10px;
+  padding-left: 15px;
+}
+
+#workskin .ig_usercaption {
+  line-height: 1.5;
+  font-size: 14px;
+  color: #000000;
+  padding-left: 15px;
+  padding-right: 15px;
+  margin-top: -15px;
+}
+
+#workskin .ig-caption {
+  padding-left: 2px;
+  font-size: 14px;
+}
+
+/*for the time shown (e.g. 56 minuets ago)*/
+#workskin .ig-time {
+  margin-top: -30px;
+  color: #888;
+  font-size: 12px;
+  padding-left: 15px;
+  padding-top: 15px;
+}
+
+/*this defines the comment section formating*/
+#workskin .ig-comments {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  padding-left: 15px;
+  padding-bottom: 10px;
+}
+
+/*this wrapper makes the comment section scrollable */
+#workskin .ig-comments-wrapper {
+  overflow-y: scroll;
+  scrollbar-width: none;
+  width: 100%;
+  max-height: 200px;
+}
+/*hides the scrollbar */
+#workskin .ig-comments-wrapper::-webkit-scrollbar {
+  display: none;
+}
+
+/*TODO: make color border visual */
+#workskin .ig-comments-avatar {
+  flex-shrink: 0;
+  width: 30px;
+  height: 30px;
+  margin-top: 2px;
+}
+
+#workskin .ig-comments-avatar img {
+  display: block;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+}
+
+#workskin .ig-comments-user-block {
+  display: flex;
+  flex-direction: row;
+  padding-top: 10px;
+}
+
+#workskin .ig-comments-user {
+  padding-left: 7px;
+  min-width: 0;
+  margin: 0;
+  margin-top: -2px;
+  vertical-align: middle;
+  display: flex;
+  flex-direction: column;
+}
+
+#workskin .ig-comments-username {
+  font-weight: bold;
+  color: #393939;
+  font-size: 14px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+#workskin .ig-comments-text {
+  padding-left: 1px;
+  padding-right: 15px;
+  color: #888;
+  font-size: 14px;
+  margin-top: -2px;
+}
+/*define a reply block to make the reply indented*/
+#workskin .ig-comments-reply-block {
+  position: relative;
+  margin-left: 60px;
+  padding-left: 12px;
+  padding-bottom: 15px;
+  display: flex;
+  flex-direction: column;
+  vertical-align: middle;
+}
+/*line to the left of the reply-block*/
+#workskin .ig-comments-reply-block::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 8px;
+  bottom: 8px;
+  width: 1px;
+  background: #ddd;
+}
+
+#workskin .ig-comments-reply-user-block {
+  display: flex;
+  flex-direction: row;
+}
+
+#workskin .ig-comments-avatar-reply {
+  flex-shrink: 0;
+  width: 30px;
+  height: 30px;
+  margin-top: 15px;
+}
+
+#workskin .ig-comments-avatar-reply img {
+  display: block;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+}
+
+#workskin .ig-comments-user-reply {
+  min-width: 0;
+  margin: 0;
+  vertical-align: middle;
+  display: flex;
+  flex-direction: column;
+  padding-left: 7px;
+  margin-top: 5px;
+}
+
+#workskin .ig-comments-username-reply {
+  font-weight: bold;
+  color: #393939;
+  font-size: 14px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-top: 5px;
+}
+
+#workskin .ig-comments-reply {
+  padding-right: 15px;
+  padding-left: 1px;
+  color: #888;
+  font-size: 14px;
+  margin-top: -5px;
+}
+
+
+
+
+
+
+
+/*This defines the story layout*/
+#workskin .ig-story {
+  display: flex;
+  max-width: 400px;
+  background: #000;
+  border-radius: 18px;
+  overflow: hidden;
+  font-family: Roboto, Helvetica, Arial, sans-serif;
+  position: relative;
+  margin: 20px auto;
+  margin-top: -40px;
+  z-index: 6;
+}
+
+
+#workskin .ig-story-progress {
+  padding: 8px;
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  right: 8px;
+  z-index: 2;
+}
+
+#workskin .ig-story-progress span {
+  display: block;
+  height: 2px;
+  border-radius: 10%;
+  background: #fff;
+  opacity: 0.8;
+}
+
+#workskin .ig-story-header {
+  position: absolute;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 6px 10px;
+  color: #fff;
+  background-color: transparent;
+}
+
+#workskin .ig-story-avatar {
+  box-shadow: #484848;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  margin-left: 5px;
+  margin-top: 20px;
+  flex-shrink: 0;
+}
+
+#workskin .ig-story-username {
+  margin-top: 10px;
+  margin-left: 10px;
+  font-size: 13px;
+  font-weight: bold;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+#workskin .ig-story-media img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+#workskin .ig-story-caption {
+  position: absolute;
+  bottom: 12px;
+  left: 12px;
+  display: inline-block;
+  max-width: 75%;
+  background: #ffffff;
+  color: #000000;
+  padding: 10px 14px;
+  border-radius: 14px;
+  font-size: 14px;
+  line-height: 1.4;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+}
+
+#workskin .ig-story-caption-avatar {
+  position: absolute;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  right: -12px;
+  top: -12px;
+  border: 2px solid #fff;
+}
+
+
+
+
+/*This defines the layout of the profile page*/
+
+#workskin .ig-profile-topbar-username {
+  font-weight: bold;
+  font-size: 16px;
+  color: #000;
+  margin: 0;
+  flex: 1;
+  text-align: center;
+}
+
+#workskin .ig-profile-back {
+  font-size: 24px;
+  color: #000;
+  cursor: pointer;
+  margin-right: 8px;
+  line-height: 1;
+}
+
+#workskin .ig-profile {
+  display: flex;
+  border-radius: 18px;
+  flex-direction: column;
+  max-width: 400px;
+  background: #fff;
+  font-family: Roboto, Helvetica, Arial, sans-serif;
+  overflow: hidden;
+  padding-top: 50px;
+  margin-top: -80px;
+}
+
+
+#workskin .ig-profile-header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 46px 16px 8px 16px;
+}
+
+#workskin .ig-profile-avatar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 3px;
+  background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
+  border-radius: 50%;
+  flex-shrink: 0;
+  width: 77px;
+  height: 77px;
+  cursor: pointer;
+}
+
+#workskin .ig-profile-avatar img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  border: 3px solid white;
+  box-sizing: border-box;
+}
+
+#workskin .ig-profile-stats-block {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+}
+
+#workskin .ig-profile-right {
+  display: flex;
+  flex-direction: column;
+  margin-left: 10px;
+  padding-top: 10px;
+}
+
+#workskin .ig-profile-username {
+  font-weight: bold;
+  font-size: 15px;
+  color: #000;
+  margin: 0;
+  margin-left: 15px;
+  padding: 2 0 6px 0px;
+}
+
+#workskin .ig-profile-stats {
+  display: flex;
+  flex-direction: row;
+  flex: 1;
+  justify-content: space-around;
+  text-align: center;
+  margin-top: -2px;
+}
+
+#workskin .ig-profile-stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#workskin .ig-profile-stat-number {
+  font-weight: bold;
+  font-size: 13px;
+  color: #000;
+  margin: 0;
+  margin-left: 15px;
+}
+
+#workskin .ig-profile-stat-label {
+  font-size: 11px;
+  color: #000;
+  margin: 0;
+  margin-left: 15px;
+  margin-top: -5px;
+}
+
+#workskin .ig-profile-highlights {
+  display: flex;
+  flex-direction: row;
+  overflow-x: scroll;
+  scrollbar-width: none;
+  margin-right: 16px;
+  padding: 8px 16px 16px 16px;
+  border-bottom: 1px solid #efefef;
+}
+
+#workskin .ig-profile-highlights::-webkit-scrollbar {
+  display: none;
+}
+
+#workskin .ig-profile-highlight {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-right: 16px;
+  flex-shrink: 0;
+}
+
+#workskin .ig-profile-highlight:last-child {
+  margin-right: 0;
+}
+
+#workskin .ig-profile-highlight-ring {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2px;
+  width: 40px;
+  height: 40px;
+  min-width: 40px;
+  min-height: 40px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+#workskin .ig-profile-highlight-ring img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  border: 1px solid white;
+  box-sizing: border-box;
+  margin-top: 10px;
+}
+
+#workskin .ig-profile-highlight-label {
+  font-size: 12px;
+  color: #000;
+  text-align: center;
+  max-width: 64px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  margin: 0;
+}
+
+/*working with % to make the grid also fit if the layout is smaller (e.g. on a phone)*/
+#workskin .ig-profile-grid {
+  display: grid;
+  grid-template-columns: 33% 33% 33%;
+  margin-top: 2px;
+  padding-bottom: 10px;
+  padding-left: 5px;
+  width: 100%;
+}
+
+#workskin .ig-profile-grid-item {
+  width: 95%;
+  height: 0;
+  padding-bottom: 120%;
+  overflow: hidden;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  margin-bottom: 5px;
+}
+/*makes the grid a scrollable element*/
+#workskin .ig-profile-grid-wrapper {
+  overflow-y: scroll;
+  overflow-x: hidden;
+  scrollbar-width: none;
+  width: 100%;
+  max-height: 490px;
+}
+
+#workskin .ig-profile-grid-wrapper::-webkit-scrollbar {
+  display: none;
+}
+
+
+
+
+
+
+
+ /*this part defines the grid */
+#workskin .ig-profile-grid-item-osc-1 {
+  background-image: url('https://i.pinimg.com/1200x/29/0f/87/290f87ad07b86df3bd0f662ad16e4d57.jpg');
+}
+
+#workskin .ig-profile-grid-item-osc-2 {
+  background-image: url('https://i.pinimg.com/736x/41/22/e3/4122e3f9bc6c53098dc5e9a1cf942938.jpg');
+}
+
+#workskin .ig-profile-grid-item-osc-3 {
+  background-image: url('https://i.pinimg.com/736x/bb/01/bd/bb01bdde0ba62e7215cef25804796ea6.jpg');
+}
+
+#workskin .ig-profile-grid-item-osc-4 {
+  background-image: url('https://i.pinimg.com/736x/10/d4/b6/10d4b6489d14e4de30f82d00e18c4715.jpg');
+}
+
+#workskin .ig-profile-grid-item-osc-5 {
+  background-image: url('https://i.pinimg.com/736x/94/10/15/941015686f3cb3ca43e9c1dac6023ded.jpg');
+}
+
+#workskin .ig-profile-grid-item-osc-6 {
+  background-image: url('https://i.pinimg.com/736x/e6/2d/ed/e62ded410fc1deece9a0e50c794fcfa9.jpg');
+}
+
+#workskin .ig-profile-grid-item-osc-7 {
+  background-image: url('https://i.pinimg.com/1200x/a2/ff/b0/a2ffb0360189e6b83afadb107d75f5de.jpg');
+}
+
+#workskin .ig-profile-grid-item-osc-8 {
+  background-image: url('https://i.pinimg.com/736x/a9/d0/71/a9d071c1140e6dc008078964cce585c6.jpg');
+}
+
+#workskin .ig-profile-grid-item-osc-9 {
+  background-image: url('https://i.pinimg.com/1200x/5a/3d/5e/5a3d5e13039bd5ebcd036477da1abe72.jpg');
+}
+
+#workskin .ig-profile-grid-item-osc-10 {
+  background-image: url('https://i.pinimg.com/736x/18/98/32/189832605f5815a8a72677a7a4a8bc7c.jpg');
+}
+
+#workskin .ig-profile-grid-item-osc-11 {
+  background-image: url('https://i.pinimg.com/736x/77/66/52/77665232daf6b5edb4ce97add6c8b02e.jpg');
+}
+
+#workskin .ig-profile-grid-item-osc-12 {
+  background-image: url('https://i.pinimg.com/736x/89/83/f6/8983f67f4ecbcd984682dc118ce7855a.jpg');
+}
+
+#workskin .ig-profile-grid-item-osc-13 {
+  background-image: url('https://i.pinimg.com/736x/9a/37/81/9a3781711f99697c5371300f256c26de.jpg');
+}
+
+
+
+/*Ao3 often adds p automatically and sometimes this led to (formating) issues so i added these to hide the p's*/
+#workskin .ig-time p {
+  margin: 0;
+}
+
+#workskin .ig_img p {
+  margin: 0;
+}
+
+#workskin .ig-profile p {
+  margin: 0;
+}
+
+#workskin .ig-action-row p {
+  margin: 0;
+}
+
+#workskin .ig-comments p {
+  margin: 0;
+}
+
+#workskin .ig-comments-avatar-reply p {
+  margin: 0;
+}
+
+#workskin .ig-comments-user-reply p {
+  margin: 0;
+}
+
+#workskin .ig-story-header p {
+  margin: 0;
+  display: inline;
+}
+
+#workskin .ig-story p {
+  margin: 0;
+}
