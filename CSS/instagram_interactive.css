@@ -800,57 +800,18 @@
 
 
 
- /*this part defines the grid */
+ /*this part defines the grid it can conatin how ever many image you want to use */
+
 #workskin .ig-profile-grid-item-osc-1 {
-  background-image: url('https://i.pinimg.com/1200x/29/0f/87/290f87ad07b86df3bd0f662ad16e4d57.jpg');
+  background-image: url('[image_link]');
 }
 
 #workskin .ig-profile-grid-item-osc-2 {
-  background-image: url('https://i.pinimg.com/736x/41/22/e3/4122e3f9bc6c53098dc5e9a1cf942938.jpg');
+  background-image: url('[image_link]');
 }
 
 #workskin .ig-profile-grid-item-osc-3 {
-  background-image: url('https://i.pinimg.com/736x/bb/01/bd/bb01bdde0ba62e7215cef25804796ea6.jpg');
-}
-
-#workskin .ig-profile-grid-item-osc-4 {
-  background-image: url('https://i.pinimg.com/736x/10/d4/b6/10d4b6489d14e4de30f82d00e18c4715.jpg');
-}
-
-#workskin .ig-profile-grid-item-osc-5 {
-  background-image: url('https://i.pinimg.com/736x/94/10/15/941015686f3cb3ca43e9c1dac6023ded.jpg');
-}
-
-#workskin .ig-profile-grid-item-osc-6 {
-  background-image: url('https://i.pinimg.com/736x/e6/2d/ed/e62ded410fc1deece9a0e50c794fcfa9.jpg');
-}
-
-#workskin .ig-profile-grid-item-osc-7 {
-  background-image: url('https://i.pinimg.com/1200x/a2/ff/b0/a2ffb0360189e6b83afadb107d75f5de.jpg');
-}
-
-#workskin .ig-profile-grid-item-osc-8 {
-  background-image: url('https://i.pinimg.com/736x/a9/d0/71/a9d071c1140e6dc008078964cce585c6.jpg');
-}
-
-#workskin .ig-profile-grid-item-osc-9 {
-  background-image: url('https://i.pinimg.com/1200x/5a/3d/5e/5a3d5e13039bd5ebcd036477da1abe72.jpg');
-}
-
-#workskin .ig-profile-grid-item-osc-10 {
-  background-image: url('https://i.pinimg.com/736x/18/98/32/189832605f5815a8a72677a7a4a8bc7c.jpg');
-}
-
-#workskin .ig-profile-grid-item-osc-11 {
-  background-image: url('https://i.pinimg.com/736x/77/66/52/77665232daf6b5edb4ce97add6c8b02e.jpg');
-}
-
-#workskin .ig-profile-grid-item-osc-12 {
-  background-image: url('https://i.pinimg.com/736x/89/83/f6/8983f67f4ecbcd984682dc118ce7855a.jpg');
-}
-
-#workskin .ig-profile-grid-item-osc-13 {
-  background-image: url('https://i.pinimg.com/736x/9a/37/81/9a3781711f99697c5371300f256c26de.jpg');
+  background-image: url('[image_link]');
 }
 
 
